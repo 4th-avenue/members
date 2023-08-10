@@ -42,4 +42,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function posts() { // post는 多이기 때문에 함수의 이름을 posts로 한다.
+        return $this->hasMany(Post::class);
+    }
 }
