@@ -12,7 +12,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts=Post::orderBy('created_at', 'desc')->get(); // 데이터베이스의 posts 테이블에 있는 데이터를 날짜 역순으로 가져와서 $posts 안에 넣는다.
+        $user=auth()->user(); // 로그인 중인 사용자의 정보를 $user 변수에 넣는다.
+        return view('post.index', compact('posts', 'user')); // resources > views > post > index.blade.php 파일을 표시한다. 이때 compact 함수를 사용해서 $posts와 $user의 데이터를 뷰 파일로 가져온다.
     }
 
     /**
