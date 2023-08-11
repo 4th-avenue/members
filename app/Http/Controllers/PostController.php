@@ -38,6 +38,14 @@ class PostController extends Controller
         $post->title=$request->title; // 입력받은 title을 post의 title에 넣는다.
         $post->body=$request->body;
         $post->user_id=auth()->user()->id; // 로그인 중인 사용자의 id를 post의 user_id에 넣는다.
+
+        if(request('image')){ // 만약 송신된 데이터 안에 사진이 포함되어 있다면
+            $original=request()->file('image')->getClientOriginalName();
+            $name=date('Ymd_His').'_'.$original;
+            request()->file('image')->move('storage/images', $name);
+            $post->image=$name;
+        }
+
         $post->save(); // 저장
         return redirect()->route('post.create')->with('message', '포스트를 발행했습니다.'); // 저장이 끝나면 post.create 화면으로 이동
         // return back(); 이전 화면으로 이동하라는 뜻으로 이 코드를 써도 된다.
