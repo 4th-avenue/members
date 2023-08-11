@@ -28,7 +28,13 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post(); // new 지시자는 새로운 Post 객체를 반환해서 $post에 넣는다.
+        $post->title=$request->title; // 입력받은 title을 post의 title에 넣는다.
+        $post->body=$request->body;
+        $post->user_id=auth()->user()->id; // 로그인 중인 사용자의 id를 post의 user_id에 넣는다.
+        $post->save(); // 저장
+        return redirect()->route('post.create')->with('message', '포스트를 발행했습니다.'); // 저장이 끝나면 post.create 화면으로 이동
+        // return back(); 이전 화면으로 이동하라는 뜻으로 이 코드를 써도 된다.
     }
 
     /**

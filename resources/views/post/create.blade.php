@@ -3,10 +3,14 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             신규 포스트 작성
         </h2>
+        @if (session('message'))
+            {{session('message')}}
+        @endif
     </x-slot>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mx-4 sm:p-8">
-            <form enctype="multipart/form-data">
+            <form method="POST" action="{{route('post.store')}}" enctype="multipart/form-data">
+                @csrf
                 <div class="md:flex items-center mt-8">
                     <div class="w-full flex flex-col">
                         <label for="title" class="font-semibold leading-none mt-4">제목</label>
