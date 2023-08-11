@@ -28,6 +28,12 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $inputs=$request->validate([ // 송신된 데이터에 Validation을 걸어서 $inputs 안에 넣는다는 의미
+            'title'=>'required|max:100', // required는 필수 항목이라는 뜻으로 값이 없으면 에러 메시지를 출력
+            'body'=>'required|max:1000', // max는 글자수 제한이다. 제한한 글자수를 넘기면 에러
+            'image'=>'nullable|image|max:1024', // nullable는 null 값 허용, 1024는 1024KB (1MB)
+        ]);
+
         $post = new Post(); // new 지시자는 새로운 Post 객체를 반환해서 $post에 넣는다.
         $post->title=$request->title; // 입력받은 title을 post의 title에 넣는다.
         $post->body=$request->body;

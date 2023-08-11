@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             신규 포스트 작성
         </h2>
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
         <x-message :message="session('message')" />
     </x-slot>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,13 +13,13 @@
                 <div class="md:flex items-center mt-8">
                     <div class="w-full flex flex-col">
                         <label for="title" class="font-semibold leading-none mt-4">제목</label>
-                        <input type="text" name="title" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="title" placeholder="Enter Title">
+                        <input type="text" name="title" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="title" placeholder="Enter Title" value="{{old('title')}}">
                     </div>
                 </div>
 
                 <div class="w-full flex flex-col">
                     <label for="body" class="font-semibold leading-none mt-4">본문</label>
-                    <textarea name="body" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="body" cols="30" rows="10"></textarea>
+                    <textarea name="body" class="w-auto py-2 placeholder-gray-300 border border-gray-300 rounded-md" id="body" cols="30" rows="10">{{old('body')}}</textarea>
                 </div>
 
                 <div class="w-full flex flex-col">
