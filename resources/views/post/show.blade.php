@@ -15,6 +15,11 @@
                     <div class="mt-4">
                         <h1 class="text-lg text-gray-700 font-semibold">
                             {{$post->title}}
+                            <a href="{{route('post.edit', $post)}}">
+                                <x-primary-button class="bg-teal-700 float-right">
+                                    편집
+                                </x-primary-button>
+                            </a>
                         </h1>
                         <hr class="w-full">
                         <p class="mt-4 text-gray-600 py-4">{{$post->body}}</p>
