@@ -99,6 +99,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        // $user=auth()->user();
+        if(auth()->user()->id == $post->user_id){
+            $post->delete();
+            return redirect()->route('post.index')->with('message', '포스트를 삭제했습니다.');
+        } else {
+            return back()->with('message', '다른 회원의 글을 삭제할 수는 없습니다.');
+        }
     }
 }
